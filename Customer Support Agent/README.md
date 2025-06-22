@@ -57,7 +57,7 @@ Google AI API Key
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/smart-customer-support-agent.git
+git clone https://github.com/Bayzid03/smart-customer-support-agent.git
 cd smart-customer-support-agent
 
 # Install dependencies
@@ -158,7 +158,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 About the Developer
 
-Built with ❤️ by a passionate AI engineer focused on creating intelligent automation solutions that enhance customer experience and business efficiency.
+Built with ❤️ by a passionate GenAI engineer focused on creating intelligent automation solutions that enhance customer experience and business efficiency.
 
 ---
 
