@@ -74,7 +74,7 @@ Google AI API Key
 ### Quick Start
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/weekend-activity-planner.git
+git clone https://github.com/Bayzid03/weekend-activity-planner.git
 cd weekend-activity-planner
 
 # Install dependencies
