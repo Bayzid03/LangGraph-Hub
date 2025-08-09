@@ -71,3 +71,60 @@ generate_video_script = create_content_node(
 create_newsletter = create_content_node(
     "Write a newsletter about: {topic} with subject line and CTA", "newsletter"
 )
+
+workflow = StateGraph(AgentState)
+
+for node_name in [
+    "input_topic",
+    "analyze_content_type",
+    "write_blog_post",
+    "create_social_media",
+    "generate_video_script",
+    "create_newsletter"
+]:
+    workflow.add_node(node_name, globals()[node_name])
+
+# Set entry point
+workflow.set_entry_point("input_topic")
+
+# Flow
+workflow.add_edge("input_topic", "analyze_content_type")
+
+# Conditional routing
+workflow.add_conditional_edges(
+    "analyze_content_type",
+    lambda x: x["content_type"] if not x.get("error") else "error",
+    {
+        "blog": "write_blog_post",
+        "social": "create_social_media",
+        "video": "generate_video_script",
+        "newsletter": "create_newsletter",
+        "error": END
+    }
+)
+for node in ["write_blog_post", "create_social_media", "generate_video_script", "create_newsletter"]:
+    workflow.add_edge(node, END)
+
+# Compile
+app = workflow.compile()
+
+def run_assistant(topic: str, content_type: str) -> Dict[str, Any]:
+    inputs = {
+        "topic": topic,
+        "content_type": content_type,
+        "result": {},
+        "error": ""
+    }
+    try:
+        result = app.invoke(inputs)
+        return {
+            "success": not result.get("error"),
+            "output": result.get("result", {}),
+            "error": result.get("error", "")
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "output": {},
+            "error": str(e)
+        }
