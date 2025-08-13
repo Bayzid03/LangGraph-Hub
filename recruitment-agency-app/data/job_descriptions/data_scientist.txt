@@ -1,0 +1,6 @@
+We are hiring a Data Scientist with:
+- 2+ years of experience in Python and data analysis
+- Strong knowledge of Pandas, NumPy, Scikit-learn
+- Experience with machine learning models and Jupyter
+- Familiarity with SQL and data visualization (Matplotlib, Seaborn)
+- Degree in Statistics, Computer Science, or related field

@@ -1,0 +1,5 @@
+We are hiring a Backend Engineer with:
+- 3+ years of Python or Node.js
+- Experience with REST APIs and databases
+- Familiarity with Docker and cloud platforms
+- Strong problem-solving skills
