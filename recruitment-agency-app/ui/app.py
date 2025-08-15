@@ -54,3 +54,62 @@ def process_application(resume_file, email, job_role):
                 print(f"Warning: Could not delete temp file: {e}")
 
     return response
+
+# ------------------ Gradio UI ------------------
+with gr.Blocks(title="📄 Recruitment Agency AI", theme=gr.themes.Soft()) as demo:
+    gr.Markdown("# 🤖 Recruitment Agency AI")
+    gr.Markdown("""
+    **AI-Powered Resume Screening**  
+    Upload your PDF resume, enter your email, and select a job role.  
+    The AI will assess your fit and send feedback automatically.
+    """)
+
+    with gr.Row():
+        with gr.Column(scale=2):
+            resume_upload = gr.File(
+                label="📄 Upload Resume (PDF)",
+                file_types=[".pdf"],
+                interactive=True
+            )
+            applicant_email = gr.Textbox(
+                label="✉️ Your Email Address",
+                placeholder="you@example.com",
+                interactive=True
+            )
+            job_dropdown = gr.Dropdown(
+                choices=JOB_ROLES,
+                label="🎯 Select Job Role",
+                interactive=True
+            )
+            submit_btn = gr.Button("🚀 Screen My Application", variant="primary")
+
+        with gr.Column(scale=3):
+            output = gr.Textbox(
+                label="🤖 AI Decision",
+                placeholder="Results will appear here...",
+                lines=10,
+                max_lines=15
+            )
+
+    submit_btn.click(
+        fn=process_application,
+        inputs=[resume_upload, applicant_email, job_dropdown],
+        outputs=output
+    )
+
+    gr.Markdown("""
+    ---
+    💡 **Powered by** [LangGraph](https://langchain.com/langgraph) + Llama3 | 
+    🔐 Your data is processed securely and deleted immediately after use.
+    """)
+
+# Launch the app - this line is critical!
+if __name__ == "__main__":
+    # Use a safe port; fallback if 7860 is busy
+    demo.launch(
+        server_name="127.0.0.1",  # Only local
+        server_port=7860,
+        share=False,             # Set to True for public link
+        show_error=True
+    )
+
