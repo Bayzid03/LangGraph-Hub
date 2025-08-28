@@ -33,3 +33,15 @@ def process_meeting(audio_file):
         return "✅ Success!", md
     except Exception as e:
         return f"❌ Workflow error: {str(e)}", None
+
+# Gradio Interface
+interface = gr.Interface(
+    fn=process_meeting,
+    inputs=gr.Audio(sources=["upload"], type="filepath"),
+    outputs=["text", "markdown"],
+    title="🎙️ AI Meeting Assistant",
+    description="Upload a meeting audio to get decisions, actions, and key points."
+)
+
+if __name__ == "__main__":
+    interface.launch()
